@@ -1,0 +1,9 @@
+<%= turbo_frame_tag dom_id(review) %>
+<div class="py-5 border-b border-gray-100">
+  <h3 class="font-bold"><%= review.created_at.to_fs(:long_ordinal) %></h3>
+  <div class="text-gray-700">
+    <%= review.body %>
+  </div>
+</div>
+
+<% end %>

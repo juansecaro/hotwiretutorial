@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_11_171011) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_12_235633) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -56,6 +56,17 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_11_171011) do
     t.index ["sneaker_id"], name: "index_line_items_on_sneaker_id"
   end
 
+  create_table "reviews", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "sneaker_id", null: false
+    t.text "body"
+    t.integer "rating", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["sneaker_id"], name: "index_reviews_on_sneaker_id"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
+  end
+
   create_table "sneakers", force: :cascade do |t|
     t.string "name"
     t.string "brand"
@@ -82,4 +93,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_11_171011) do
   add_foreign_key "carts", "users"
   add_foreign_key "line_items", "carts"
   add_foreign_key "line_items", "sneakers"
+  add_foreign_key "reviews", "sneakers"
+  add_foreign_key "reviews", "users"
 end
